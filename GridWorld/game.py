@@ -48,13 +48,6 @@ class Game:
         if self.board[pos.row][pos.col] == 'X':
             return self.player, -5, False
 
-        # change the physical position
-        if pos != self.goal:
-            self.board[self.player.row][self.player.col], self.board[pos.row][pos.col] = self.board[pos.row][pos.col], self.board[self.player.row][self.player.col]
-        else:
-            self.board[self.player.row][self.player.col] = '.'
-            self.board[pos.row][pos.col] = 'S'
-
         self.player = pos
 
         if (self.player == self.goal):
@@ -109,39 +102,3 @@ class Game:
 
 
         return State(row, col)
-
-## TEST ##
-
-game: Game = Game()
-print("Grid World")
-
-print("Startup test")
-game.test()
-
-done = False
-while not done:
-    userAction: str = input("> ")
-
-    state: State
-    reward: int = 0
-    
-    if userAction.upper() == 'UP':
-        state, reward, done = game.step(Action.UP)
-    elif userAction.upper() == 'DOWN':
-        state, reward, done = game.step(Action.DOWN)
-    elif userAction.upper() == 'RIGHT':
-        state, reward, done = game.step(Action.RIGHT)
-    elif userAction.upper() == 'LEFT':
-        state, reward, done = game.step(Action.LEFT)
-    else:
-        print("Action not valid")
-
-    print('state:', state)
-    print('reward:', reward)
-
-    # board
-    for row in range(game.rows):
-        for col in range(game.cols):
-            print(game.board[row][col], end=' ')
-        print()
-    
