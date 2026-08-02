@@ -11,9 +11,11 @@ def main() -> None:
 
     trainer = Trainer(game, agent)
 
-    trainer.train(episodes = 10000)
+    trainer.train(episodes = 1000)
 
-    pprint.pprint(agent.q_table)
+    # pprint.pprint(agent.q_table)
+
+    trainer.print_policy()
 
 if __name__ == "__main__":
     main()

@@ -24,3 +24,31 @@ class Trainer:
 
             state = next_state
 
+    def print_policy(self):
+        rows = self.game.rows
+        cols = self.game.cols
+
+        for r in range(rows):
+            for c in range(cols):
+                q_values = self.agent.get_q_values(State(r, c))
+                max_action = max(q_values.items(), key=lambda item: item[1])[0]
+
+                if q_values[max_action] == 0:
+                    print('?', end=' ')
+                    continue
+
+                if max_action == Action.UP:
+                    print('↑', end=' ')
+                elif max_action == Action.DOWN:
+                    print('↓', end=' ')
+                elif max_action == Action.RIGHT:
+                    print('→', end=' ')
+                elif max_action == Action.LEFT:
+                    print('←', end=' ')
+                else:
+                    print("E?", end=' ')
+
+            print()
+
+                
+
