@@ -1,0 +1,18 @@
+X1
+X2              N1
+.                              Y
+.               N2
+Xp-1
+
+Input Layer  Hidden Layer  Output Layer
+  l = 0        l = 1         l = 2
+n[0] = p    n[1] = 2      n[2] = 1
+
+Parameters:
+W[l] := Weights for layers l
+dimention: n[l] x n[l - 1]
+
+
+
+
+
