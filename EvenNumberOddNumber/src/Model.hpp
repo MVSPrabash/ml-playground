@@ -1,7 +1,9 @@
 #pragma once
 
 #include <vector>
+
 #include "Layer.hpp"
+#include "Types.hpp"
 
 class Model {
 public:
@@ -14,9 +16,9 @@ public:
     [[nodiscard]] const Layers& layers() const noexcept;
     [[nodiscard]] int nLayers() const noexcept;
 
-    [[nodiscard]] std::vector<double> forward(const std::vector<double>& x);
+    [[nodiscard]] Math::Matrix forward(const Math::Matrix& x);
 
-    void train(const std::vector<double>& x, std::vector<double>& y);
+    void train(const Math::Matrix& x, const Math::Matrix& y);
     
 private:
     Layers layers_;
