@@ -5,13 +5,14 @@
 #include <stdexcept>
 
 Layer::Layer(
-    int n_in,
-    int n_out,
+    std::size_t n_in,
+    std::size_t n_out,
     ActivationFunction activation,
     bool random
 ) {
-    if (n_in <= 0 || n_out <= 0) {
-        throw std::invalid_argument("Invalid input or output dimensions");
+
+    if (n_in == 0 || n_out == 0) {
+        throw std::invalid_argument("Layer input or output size can't be zero");
     }
 
     weights_ = Weights(n_in, Math::Vector(n_out));
@@ -28,8 +29,8 @@ Layer::Layer(
 
     std::uniform_real_distribution weightDist (-xavier, +xavier);
 
-    for (int i = 0; i < n_in; i++) {
-        for (int j = 0; j < n_out; j++)
+    for (std::size_t i = 0; i < n_in; i++) {
+        for (std::size_t j = 0; j < n_out; j++)
             weights_[i][j] = weightDist(gen);
     }
 }
@@ -101,16 +102,16 @@ void Layer::updateBias(const Bias &bias) {
     bias_ = bias;
 }
 
-void Layer::setWeight(int i, int j, double weight) {
-    if (j < 0 || j >= n_out() || i < 0 || i >= n_in()) {
+void Layer::setWeight(std::size_t i, std::size_t j, double weight) {
+    if (i >= n_in() || j >= n_out()) {
         throw std::invalid_argument("Invalid weight index, i or j value");
     }
 
     weights_[i][j] = weight;
 }
 
-void Layer::setBias(int j, double bias) {
-    if (j < 0 || j >= n_out()) {
+void Layer::setBias(std::size_t j, double bias) {
+    if (j >= n_out()) {
         throw std::invalid_argument("Invalid bias index");
     }
 
@@ -129,7 +130,7 @@ std::size_t Layer::n_out() const noexcept {
 
 /// @brief General Matrix-Matrix Multiplication
 void Layer::gemm(
-    int M, int N, int K,
+    std::size_t M, std::size_t N, std::size_t K,
     double alpha,
     const Math::Matrix& A,
     const Math::Matrix& B,
@@ -142,11 +143,11 @@ void Layer::gemm(
     //
     // C = alpha * A * B + beta * C
 
-    for (int i = 0; i < M; ++i) {
-        for (int j = 0; j < N; ++j) {
+    for (std::size_t i = 0; i < M; ++i) {
+        for (std::size_t j = 0; j < N; ++j) {
             double sum = 0.0;
 
-            for (int k = 0; k < K; ++k) {
+            for (std::size_t k = 0; k < K; ++k) {
                 sum += A[i][k] * B[k][j];
             }
 

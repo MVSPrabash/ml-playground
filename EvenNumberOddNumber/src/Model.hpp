@@ -14,7 +14,7 @@ public:
     void addLayer(const Layer& l);
 
     [[nodiscard]] const Layers& layers() const noexcept;
-    [[nodiscard]] int nLayers() const noexcept;
+    [[nodiscard]] std::size_t nLayers() const noexcept;
 
     [[nodiscard]] Math::Matrix forward(const Math::Matrix& x);
 

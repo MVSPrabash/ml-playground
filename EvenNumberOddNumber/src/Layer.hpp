@@ -16,8 +16,8 @@ public:
     /// @param activation Non Linear Activation Function type
     /// @param random Generate initial parameter randomly
     Layer(
-        int n_in,
-        int n_out,
+        std::size_t n_in,
+        std::size_t n_out,
         ActivationFunction activation = Activation::Linear,
         bool random = true
     );
@@ -45,13 +45,13 @@ public:
     /// @param i Input index of the neuron
     /// @param j Neuron index in the layer
     /// @param weight New weight
-    void setWeight(int i, int j, double weight);
+    void setWeight(std::size_t i, std::size_t j, double weight);
 
 
     /// @brief set bias value of jth neuron
     /// @param j Neuron index in the layer
     /// @param bias New bias
-    void setBias(int j, double bias);
+    void setBias(std::size_t j, double bias);
 
     /// @brief input dimension or previous layer size
     [[nodiscard]] std::size_t n_in() const noexcept;
@@ -67,7 +67,7 @@ private:
 
     // inspired by CUDA
     void gemm(
-        int M, int N, int K,
+        std::size_t M, std::size_t N, std::size_t K,
         double alpha,
         const Math::Matrix& A,
         const Math::Matrix& B,

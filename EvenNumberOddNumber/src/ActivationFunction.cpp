@@ -51,7 +51,7 @@ Math::Matrix ActivationFunction::operator() (
     const Math::Matrix& input
 ) const {
 
-    int m = input.size();
+    std::size_t m = input.size();
 
     Math::Matrix output(m);
 
