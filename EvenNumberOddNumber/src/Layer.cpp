@@ -14,7 +14,7 @@ Layer::Layer(
         throw std::invalid_argument("Invalid input or output dimensions");
     }
 
-    weights_ = Weights(n_in, std::vector<double>(n_out));
+    weights_ = Weights(n_in, Math::Vector(n_out));
     bias_    = Bias(n_out);
 
     activationFunction_ = activation;
@@ -43,10 +43,7 @@ ActivationFunction Layer::activationFunction() const noexcept {
 }
 
 
-std::vector<std::vector<double>>
-Layer::forward (
-    const std::vector<std::vector<double> >& prevA
-) const {
+Math::Matrix Layer::forward (const Math::Matrix& prevA) const {
     if (prevA.size() == 0) {
         throw std::invalid_argument("prevA.size is 0");
     }
@@ -57,7 +54,7 @@ Layer::forward (
 
     std::size_t m = prevA.size();
 
-    std::vector<std::vector<double>> Y (m, bias_);
+    Math::Matrix Y (m, bias_);
 
     // prevA:    m x n_in
     // weights_: n_in x n_out
@@ -134,10 +131,10 @@ std::size_t Layer::n_out() const noexcept {
 void Layer::gemm(
     int M, int N, int K,
     double alpha,
-    const std::vector<std::vector<double>>& A,
-    const std::vector<std::vector<double>>& B,
+    const Math::Matrix& A,
+    const Math::Matrix& B,
     double beta,
-    std::vector<std::vector<double>>& C
+    Math::Matrix& C
 ) const noexcept {
     // A: M x K
     // B: K x N

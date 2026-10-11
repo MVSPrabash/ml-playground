@@ -1,14 +1,13 @@
 #pragma once
 
-#include <vector>
-
 #include "ActivationFunction.hpp"
+#include "Types.hpp"
 
 class Layer {
 public:
-    using Weight  = double;
-    using Weights = std::vector<std::vector<Weight>>;
-    using Bias    = std::vector<double>;
+    using Weight  = Math::Scalar;
+    using Weights = Math::Matrix;
+    using Bias    = Math::Vector;
 
 
     /// @brief Initialize a Layer, set an Activation Function
@@ -33,9 +32,7 @@ public:
     /// @brief Forward pass the incoming values through this layer
     /// @param prevA Activation values of previous layer
     /// @return Computed Activation values of this layer
-    [[nodiscard]]
-    std::vector<std::vector<double>>
-    forward(const std::vector<std::vector<double>>& prevA) const;
+    [[nodiscard]] Math::Matrix forward(const Math::Matrix& prevA) const;
 
 
     [[nodiscard]] const Weights& weights() const noexcept;
@@ -72,9 +69,9 @@ private:
     void gemm(
         int M, int N, int K,
         double alpha,
-        const std::vector<std::vector<double>>& A,
-        const std::vector<std::vector<double>>& B,
+        const Math::Matrix& A,
+        const Math::Matrix& B,
         double beta,
-        std::vector<std::vector<double>>& C
+        Math::Matrix& C
     ) const noexcept;
 };
