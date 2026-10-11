@@ -31,11 +31,11 @@ double ActivationFunction::operator()(double z) const {
     throw std::logic_error("Invalid Activation Function");
 }
 
-std::vector<double> ActivationFunction::operator()(
-    const std::vector<double>& input
+Math::Vector ActivationFunction::operator()(
+    const Math::Vector& input
 ) const {
 
-    std::vector<double> output(input.size());
+    Math::Vector output(input.size());
 
     std::transform(
         input.begin(),
@@ -47,13 +47,13 @@ std::vector<double> ActivationFunction::operator()(
     return output;
 }
 
-std::vector<std::vector<double>> ActivationFunction::operator() (
-    const std::vector<std::vector<double>>& input
+Math::Matrix ActivationFunction::operator() (
+    const Math::Matrix& input
 ) const {
 
     int m = input.size();
 
-    std::vector<std::vector<double>> output(m);
+    Math::Matrix output(m);
 
     std::transform(
         input.begin(),

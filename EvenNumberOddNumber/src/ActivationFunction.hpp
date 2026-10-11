@@ -1,6 +1,7 @@
 #pragma once
 
-#include <vector>
+#include "Types.hpp"
+
 #include <algorithm>
 
 enum class Activation {
@@ -26,18 +27,14 @@ public:
 
     /// @brief Process activation values element-wise
     [[nodiscard]]
-    std::vector<double> operator()(
-        const std::vector<double>& input
-    ) const;
+    Math::Vector operator()(const Math::Vector& input) const;
 
 
     /// @brief Batch process Activation values element-wise
     /// @param input Batch of input. dimension: batch_size x n
     /// @return Element-wise activation values
     [[nodiscard]]
-    std::vector<std::vector<double>> operator() (
-        const std::vector<std::vector<double>>& input
-    ) const;
+    Math::Matrix operator() (const Math::Matrix& input) const;
 
 
     /// @brief Derivative of the Activation Function at z
