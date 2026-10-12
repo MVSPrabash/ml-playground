@@ -7,7 +7,7 @@
 enum class Activation {
     Linear,
     Sigmoid,
-    ReLu,
+    ReLU,
     Tanh
 };
 

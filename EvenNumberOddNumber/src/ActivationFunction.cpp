@@ -22,7 +22,7 @@ double ActivationFunction::operator()(double z) const {
         return z;
     case Activation::Sigmoid:
         return sigmoid(z);
-    case Activation::ReLu:
+    case Activation::ReLU:
         return relu(z);
     case Activation::Tanh:
         return tanh(z);
@@ -71,7 +71,7 @@ double ActivationFunction::derivative(double z) const {
         return 1;
     case Activation::Sigmoid:
         return sigmoidDerivative(z);
-    case Activation::ReLu:
+    case Activation::ReLU:
         return reluDerivative(z);
     case Activation::Tanh:
         return tanhDerivative(z);
