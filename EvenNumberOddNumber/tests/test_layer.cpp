@@ -32,7 +32,7 @@ void test_linear() {
 }
 
 void test_relu() {
-    Layer layer(1, 2, Activation::ReLu, false);
+    Layer layer(1, 2, Activation::ReLU, false);
 
     layer.updateWeights({{-2.0, 3.0}});
     layer.updateBias({0.0, -1.0});
