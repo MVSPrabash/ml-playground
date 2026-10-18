@@ -1,6 +1,7 @@
 #include "Model.hpp"
 
 #include <stdexcept>
+#include <cmath>
 
 Model::Model (
     std::size_t inputSize,
@@ -51,4 +52,19 @@ Math::Matrix Model::forward(const Math::Matrix &x) const {
 
 void Model::train(const Math::Matrix& x, const Math::Matrix& y) {
     
+}
+
+
+Math::Scalar Model::loss(
+    const Math::Scalar y,
+    const Math::Scalar yHat
+) const {
+    return - y * std::log(yHat) - (1 - y) * std::log(1 - yHat);
+}
+
+Math::Scalar Model::lossDerivative(
+    const Math::Scalar y,
+    const Math::Scalar yHat
+) const {
+    return yHat - y;
 }

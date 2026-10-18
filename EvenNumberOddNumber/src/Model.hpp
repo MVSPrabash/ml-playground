@@ -33,4 +33,21 @@ private:
     std::size_t inputSize_;
     std::size_t outputSize_;
     Layers layers_;
+
+    /// @brief Binary Cross-Entropy Loss Function
+    /// @param y True y Value
+    /// @param yHat Predicted y Value
+    Math::Scalar loss(
+        const Math::Scalar y,
+        const Math::Scalar yHat
+    ) const;
+
+    /// @brief Derivative of Binary Cross-Entropy Loss Function
+    /// @param y True y Value
+    /// @param yHat Predicted y Value
+    Math::Scalar lossDerivative(
+        const Math::Scalar y,
+        const Math::Scalar yHat
+    ) const;
+    
 };
